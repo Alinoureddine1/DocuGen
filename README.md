@@ -6,7 +6,7 @@ DocuGen is a Python-based tool that generates study materials from Wikipedia art
 
 - Generate study materials from random or specified Wikipedia articles
 - Output in both .docx and .pdf formats
-- Customize the number of documents, batches, and sentences per document
+- Customize the number of documents and sentences per document
 - Paraphrase content to avoid direct copying
 - Add random student names and class names to documents
 
@@ -14,11 +14,11 @@ DocuGen is a Python-based tool that generates study materials from Wikipedia art
 
 1. Clone this repository:
    ```
-   git clone https://github.com/Alinoureddine1/DocuGen.git
+   git clone https://github.com/yourusername/DocuGen.git
    cd DocuGen
    ```
 
-2. (Optional) Create and activate a virtual environment:
+2. Create and activate a virtual environment:
    ```
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
@@ -31,65 +31,46 @@ DocuGen is a Python-based tool that generates study materials from Wikipedia art
 
 4. Download required NLTK data:
    ```
-   python scripts/nltk_downloader.py
+   python -m docugen.nltk_downloader
    ```
 
 ## Usage
 
-You can use DocuGen in several ways:
-
-### 1. As a command-line tool
-
-After installation, you can use the `docugen` command directly:
+After installation, you can use DocuGen directly from the command line:
 
 ```
-docugen -n 5 -b 1 -f pdf -t "Artificial Intelligence"
+docugen [options]
 ```
 
-### 2. Using Python scripts
+### Options
 
-Run the main script directly:
-
-```
-python -m docugen.docugen -n 10 -b 2 -f docx
-```
-
-### 3. Using provided batch scripts (Windows only)
-
-For quick generation (5 documents in .docx format):
-```
-scripts\quick_generate.bat
-```
-
-For custom generation:
-```
-scripts\run_document_generator.bat -n 10 -b 2 -f pdf
-```
-
-### Arguments
-
-- `-n, --number`: Number of documents to generate per batch (default: 10)
-- `-b, --batch`: Number of batches to generate (default: 1)
-- `-f, --format`: Output format, either "docx" or "pdf" (default: "docx")
+- `-n, --number`: Number of documents to generate (default: 10)
 - `-t, --title`: Specific Wikipedia page title to use (optional)
 - `-c, --class_names`: Custom class names to use (optional)
 - `-s, --sentences`: Number of sentences per document chunk (default: 25)
+- `-f, --format`: Output format, either "docx" or "pdf" (default: "docx")
 
-## Example
+### Examples
 
-Generate 5 PDF documents about Python programming:
-
+Generate 5 PDF documents:
 ```
-docugen -n 5 -f pdf -t "Python (programming language)"
+docugen -n 5 -f pdf
 ```
 
-This will create a folder in the `output` directory containing 5 PDF files, each with content derived from the Wikipedia page on Python programming.
+Generate 10 documents about Python programming:
+```
+docugen -n 10 -t "Python (programming language)"
+```
+
+## Output
+
+Generated documents are placed in an `output` folder in your current working directory. Each document's filename includes a number, the source Wikipedia page title, and the document title.
 
 ## Development
 
 To set up the development environment:
 
-1. Clone the repository (if you haven't already)
+1. Clone the repository
 2. Create and activate a virtual environment
 3. Install the package in editable mode with development dependencies:
    ```
@@ -106,4 +87,4 @@ Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) fil
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
