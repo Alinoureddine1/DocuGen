@@ -1,5 +1,7 @@
 import nltk
 import ssl
+import sys
+import subprocess
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -8,7 +10,11 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
-print("NLTK data downloaded successfully.")
+def download_nltk_data():
+    nltk_resources = ["punkt", "averaged_perceptron_tagger", "wordnet", "punkt_tab"]
+    for resource in nltk_resources:
+        subprocess.check_call([sys.executable, "-m", "nltk.downloader", resource])
+
+if __name__ == "__main__":
+    download_nltk_data()
+    print("NLTK data downloaded successfully.")

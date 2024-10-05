@@ -1,21 +1,23 @@
 from setuptools import setup, find_packages
 import subprocess
 import sys
+import os
 from setuptools.command.develop import develop
 from setuptools.command.install import install
 
-def download_nltk_data():
-    subprocess.check_call([sys.executable, "-m", "nltk.downloader", "punkt", "averaged_perceptron_tagger", "wordnet"])
+def run_nltk_downloader():
+    downloader_path = os.path.join('scripts', 'nltk_downloader.py')
+    subprocess.check_call([sys.executable, downloader_path])
 
 class PostDevelopCommand(develop):
     def run(self):
         develop.run(self)
-        download_nltk_data()
+        run_nltk_downloader()
 
 class PostInstallCommand(install):
     def run(self):
         install.run(self)
-        download_nltk_data()
+        run_nltk_downloader()
 
 setup(
     name="docugen",
